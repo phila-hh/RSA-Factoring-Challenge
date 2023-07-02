@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+from sys import argv
+
+def factor_number(number):
+    """Factorizes the input number into two smaller numbers
+
+    Args:
+        number (int): number input to be factorized
+    """
+    n_1 = 2
+    while True:
+        if (number % n_1 == 0):
+            n_2 = number / n_1
+            break
+        n_1 += 1
+    return (int(n_2), n_1)
+
+input_file = open(argv[1])
+num_list = input_file.readlines()
+for i in range (0, len(num_list)):
+    num = num_list[i]
+    factor = factor_number(int(num))
+    print("{}={}*{}".format(num.strip(), factor[0], factor[1]))
+input_file.close()
