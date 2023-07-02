@@ -1,24 +1,19 @@
 #!/usr/bin/python3
 from sys import argv
 
-def factor_number(number):
-    """Factorizes the input number into two smaller numbers
+def factorize(num):
+    """ Factorizes a number into two smaller numbers """
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return num // i, i
+    return num, 1
 
-    Args:
-        number (int): number input to be factorized
-    """
-    n_1 = 2
-    while True:
-        if (number % n_1 == 0):
-            n_2 = number / n_1
-            break
-        n_1 += 1
-    return (int(n_2), n_1)
+def main():
+    with open(argv[1], "r") as f:
+        for line in f:
+            n = int(line.strip())
+            p, q = factorize(n)
+            print("{}={}*{}".format(n, p, q))
 
-input_file = open(argv[1])
-num_list = input_file.readlines()
-for i in range (0, len(num_list)):
-    num = num_list[i]
-    factor = factor_number(int(num))
-    print("{}={}*{}".format(num.strip(), factor[0], factor[1]))
-input_file.close()
+if __name__ == "__main__":
+    main()
